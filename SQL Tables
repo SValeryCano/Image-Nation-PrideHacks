@@ -185,6 +185,19 @@ CREATE TABLE `region_name` (
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
+-- imagenation.`role` definition
+
+CREATE TABLE `role` (
+  `role_id` int NOT NULL AUTO_INCREMENT,
+  `role_name_id` int NOT NULL,
+  `artist_id` int DEFAULT NULL,
+  `movie_id` int DEFAULT NULL,
+  `character_name_en` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `character_name_fr` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  PRIMARY KEY (`role_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
 -- imagenation.role_name definition
 
 CREATE TABLE `role_name` (
@@ -204,3 +217,23 @@ CREATE TABLE `synopses` (
   `description` varchar(256) COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`synopsis_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+-- imagenation.tag definition
+
+CREATE TABLE `tag` (
+  `tag_id` int NOT NULL AUTO_INCREMENT,
+  `tag_name_id` int NOT NULL,
+  `artist_id` int DEFAULT NULL,
+  `movie_id` int DEFAULT NULL,
+  PRIMARY KEY (`tag_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+-- imagenation.tag_name definition
+
+CREATE TABLE `tag_name` (
+  `tag_name_id` int NOT NULL AUTO_INCREMENT,
+  `tag_text` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  PRIMARY KEY (`tag_name_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
