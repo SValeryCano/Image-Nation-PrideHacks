@@ -42,15 +42,28 @@ and tn.tag_text = 'Child';
 #### Find artists linked to Montreal:
 
 SELECT  m.name_original , m.year_release, n.town_fr
-<br>FROM region_name rn, region r, artists a
-<br>WHERE rn.town_fr = 'Montreal' and rn.region_name_id  = r.region_name_id and r.artist_id = a.artist_id ;
-
+<br>FROM region_name rn, region r, artists a  
+<br>WHERE rn.town_fr = 'Montreal'
+and rn.region_name_id  = r.region_name_id
+and r.artist_id = a.artist_id ;
 
 #### Find all drama movies:
 
 SELECT m.name_original , m.year_release , gn.genre_name_fr
 <br>FROM genre_name gn, genre g, movie m
 <br>WHERE genre_name_fr = 'Drame'
-and gn.genre_name_id = g.genre_name_id
-;
+and gn.genre_name_id = g.genre_name_id;
 
+#### Found media from artist emergent:
+
+SELECT a.first_name, a.last_name, am.media_type , am.url
+<br>FROM artists a, artist_media am
+<br>WHERE a.emerging_artist = true
+and a.artist_id  = am.artist_id;
+
+#### See all artists + roles in a specific movie:
+
+SELECT a.first_name , a.last_name , rn.role_name_en
+<br>FROM role_name rn, role r, movie m, artists a
+<br>WHERE rn.role_name_id = r.role_name_id
+and r.movie_id  = m.movie_id and r.artist_id = a.artist_id and m.movie_id  = 1;
