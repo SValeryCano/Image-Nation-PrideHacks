@@ -5,6 +5,7 @@ https://www.apachefriends.org/
 
 Then execute the SQL script that will create tables.
 
+![Alt text](images/imagenation_schema.png?raw=true "Schema")
 
 =========  Main tables  ==================
 
