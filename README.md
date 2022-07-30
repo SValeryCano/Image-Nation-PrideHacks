@@ -42,7 +42,7 @@ and tn.tag_text = 'Child';
 #### Find artists linked to Montreal:
 
 SELECT  m.name_original , m.year_release, n.town_fr
-<br>FROM region_name rn, region r, artists a  
+<br>FROM region_name rn, region r, artists a
 <br>WHERE rn.town_fr = 'Montreal' and rn.region_name_id  = r.region_name_id and r.artist_id = a.artist_id ;
 
 
