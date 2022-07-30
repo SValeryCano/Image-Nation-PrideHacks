@@ -1,0 +1,206 @@
+-- imagenation.artist_media definition
+
+CREATE TABLE `artist_media` (
+  `artist_media_id` int NOT NULL AUTO_INCREMENT,
+  `artist_id` int NOT NULL,
+  `media_type` enum('image','movie') COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `url` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  PRIMARY KEY (`artist_media_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+-- imagenation.artist_statements definition
+
+CREATE TABLE `artist_statements` (
+  `artist_statement_id` int NOT NULL,
+  `artist_id` int DEFAULT NULL,
+  `language_id` int DEFAULT NULL,
+  `description` varchar(256) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  PRIMARY KEY (`artist_statement_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+-- imagenation.artists definition
+
+CREATE TABLE `artists` (
+  `artist_id` int NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `last_name` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `language_id` int DEFAULT NULL,
+  `emerging_artist` tinyint(1) DEFAULT NULL,
+  `birthplace` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `current_location` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `date_added` date DEFAULT NULL,
+  `social_media` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `artist_image_id` int DEFAULT NULL,
+  PRIMARY KEY (`artist_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+-- imagenation.biographies definition
+
+CREATE TABLE `biographies` (
+  `biography_id` int NOT NULL,
+  `artist_id` int DEFAULT NULL,
+  `language_id` int DEFAULT NULL,
+  `description` varchar(256) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  PRIMARY KEY (`biography_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+-- imagenation.dim_cultural_identities definition
+
+CREATE TABLE `dim_cultural_identities` (
+  `cultural_identity_id` int NOT NULL AUTO_INCREMENT,
+  `cultural_identity_value` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  PRIMARY KEY (`cultural_identity_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+-- imagenation.dim_gender_identities definition
+
+CREATE TABLE `dim_gender_identities` (
+  `gender_identity_id` int NOT NULL AUTO_INCREMENT,
+  `gender_identity_value` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  PRIMARY KEY (`gender_identity_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+-- imagenation.dim_sexual_identities definition
+
+CREATE TABLE `dim_sexual_identities` (
+  `sexual_identity_id` int NOT NULL AUTO_INCREMENT,
+  `sexual_identity_value` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  PRIMARY KEY (`sexual_identity_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+-- imagenation.fct_cultual_identities definition
+
+CREATE TABLE `fct_cultual_identities` (
+  `artist_id` int DEFAULT NULL,
+  `cultural_identity_id` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+-- imagenation.fct_gender_identities definition
+
+CREATE TABLE `fct_gender_identities` (
+  `artist_id` int DEFAULT NULL,
+  `gender_identity_id` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+-- imagenation.fct_sexual_identities definition
+
+CREATE TABLE `fct_sexual_identities` (
+  `artist_id` int DEFAULT NULL,
+  `sexual_identity_id` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+-- imagenation.genre definition
+
+CREATE TABLE `genre` (
+  `genre_id` int NOT NULL AUTO_INCREMENT,
+  `movie_id` int NOT NULL,
+  `genre_name_id` int NOT NULL,
+  PRIMARY KEY (`genre_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+-- imagenation.genre_name definition
+
+CREATE TABLE `genre_name` (
+  `genre_name_id` int NOT NULL AUTO_INCREMENT,
+  `genre_name_en` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `genre_name_fr` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  PRIMARY KEY (`genre_name_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+-- imagenation.languages definition
+
+CREATE TABLE `languages` (
+  `language_id` int NOT NULL AUTO_INCREMENT,
+  `language_name` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  PRIMARY KEY (`language_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+-- imagenation.movie definition
+
+CREATE TABLE `movie` (
+  `movie_id` int NOT NULL AUTO_INCREMENT,
+  `name_original` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `name_en` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `name_fr` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `year_release` int DEFAULT NULL,
+  PRIMARY KEY (`movie_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+-- imagenation.movie_media definition
+
+CREATE TABLE `movie_media` (
+  `movie_media_id` int NOT NULL AUTO_INCREMENT,
+  `movie_id` int NOT NULL,
+  `media_type` enum('image','poster','trailer','movie') COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `url` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  PRIMARY KEY (`movie_media_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+-- imagenation.production definition
+
+CREATE TABLE `production` (
+  `production_id` int NOT NULL AUTO_INCREMENT,
+  `movie_id` int DEFAULT NULL,
+  `region_id` int DEFAULT NULL,
+  PRIMARY KEY (`production_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+-- imagenation.region definition
+
+CREATE TABLE `region` (
+  `region_id` int NOT NULL AUTO_INCREMENT,
+  `artist_id` int NOT NULL,
+  `region_name_id` int DEFAULT NULL,
+  PRIMARY KEY (`region_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+-- imagenation.region_name definition
+
+CREATE TABLE `region_name` (
+  `region_name_id` int NOT NULL AUTO_INCREMENT,
+  `town_en` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `division_en` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `country_en` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `town_fr` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `division_fr` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `country_fr` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  PRIMARY KEY (`region_name_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+-- imagenation.role_name definition
+
+CREATE TABLE `role_name` (
+  `role_name_id` int NOT NULL AUTO_INCREMENT,
+  `role_name_en` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `role_name_fr` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  PRIMARY KEY (`role_name_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+-- imagenation.synopses definition
+
+CREATE TABLE `synopses` (
+  `synopsis_id` int NOT NULL,
+  `language_id` int DEFAULT NULL,
+  `movie_id` int DEFAULT NULL,
+  `description` varchar(256) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  PRIMARY KEY (`synopsis_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
